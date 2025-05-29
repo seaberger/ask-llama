@@ -1,0 +1,7 @@
+{
+  "content": "{{ content if content is defined and content is not none else '' }}"{% if data %},{% endif %}
+  {%- for k, v in data.items() %}
+  "{{ k }}": {{ v|tojson }}{% if not loop.last %},{% endif %}
+  {%- endfor %}
+}
+

@@ -1,0 +1,23 @@
+{# Modified llama.cpp default chat template - fixes message.content issues #}
+{%- for message in messages %}
+    {%- if message.role == 'system' %}
+        [INST] <<SYS>>
+        {{ message.content }}
+        <</SYS>>{% if not loop.last %}\n{% endif %}
+    {%- elif message.role == 'user' %}
+        [INST] {{ message.content }} [/INST]{% if not loop.last %}\n{% endif %}
+    {%- elif message.role == 'assistant' %}
+        {%- set m_content = message.content if message.content is defined and message.content is not none else '' %}
+        {{ m_content }}{% if not loop.last %}\n{% endif %}
+    {%- elif message.role == 'function' %}
+        [FUNCTION]
+        {{ message.name }}: {{ message.arguments | tojson }}
+        {% if message.content is defined and message.content is not none %}
+        Output: {{ message.content }}
+        {%- endif %}
+        [/FUNCTION]{% if not loop.last %}\n{% endif %}
+    {%- else %}
+        {{ message.content }}{% if not loop.last %}\n{% endif %}
+    {%- endif %}
+{%- endfor %}
+

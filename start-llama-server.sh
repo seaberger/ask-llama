@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script to start llama-server with minimal parameters
 
-SERVER_PATH="/opt/homebrew/Cellar/llama.cpp/5370/bin/llama-server"
+SERVER_PATH="/Users/seanbergman/Repositories/ask_llama_scripts/llama.cpp/build/bin/llama-server"
 MODEL_PATH="/Users/seanbergman/Library/Caches/llama.cpp/Qwen3-4B-Q8_0.gguf"
 LOG_FILE="/tmp/llama-server.log"
 
@@ -11,7 +11,7 @@ sleep 2
 
 # Start server with minimal parameters
 echo "Starting llama-server..."
-"$SERVER_PATH" --model "$MODEL_PATH" --jinja --n-gpu-layers 1 > "$LOG_FILE" 2>&1 &
+"$SERVER_PATH" --model "$MODEL_PATH" --jinja -ngl 99 -c 40960 --chat-template-file "$(pwd)/chat_template.jinja" > "$LOG_FILE" 2>&1 &
 
 PID=$!
 echo "Server started with PID $PID"
