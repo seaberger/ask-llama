@@ -1,0 +1,26 @@
+# Python cache and bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Python virtual environments
+.venv/
+venv/
+
+# Logs
+*.log
+
+# macOS system files
+.DS_Store
+
+# Editor backup files
+*.swp
+*.swo
+*~
+
+# Example: Local model/cache directory (edit as needed)
+# /Users/seanbergman/Library/Caches/llama.cpp/
+
+# Ignore archive if not needed in the repo
+# archive/
+
